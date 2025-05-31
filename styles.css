@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
-    padding: 20px;
+    padding: 15px;
 }
 
 #lock-screen {
@@ -23,14 +23,14 @@ body {
 
 .lock-container h2 {
     color: #003087;
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 
 #password-input {
-    padding: 10px;
+    padding: 8px;
     width: 200px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
@@ -39,11 +39,11 @@ body {
 #unlock-button {
     background-color: #003087;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #unlock-button:hover {
@@ -52,14 +52,15 @@ body {
 
 .error {
     color: #d32f2f;
-    margin-top: 10px;
+    margin-top: 8px;
+    font-size: 12px;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     background-color: white;
-    padding: 20px;
+    padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -68,54 +69,67 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #003087;
+    margin-bottom: 10px;
 }
 
 h1 {
     color: #003087;
-    font-size: 24px;
+    font-size: 20px;
     margin: 0;
 }
 
 .logo {
-    color: #003087;
-    font-size: 24px;
-    font-weight: bold;
-    font-style: italic;
+    width: 100px;
+    height: 40px;
 }
 
 .intro {
-    font-size: 14px;
+    font-size: 12px;
     color: #333;
-    margin: 10px 0 20px;
+    margin: 8px 0 12px;
 }
 
 .section {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 h2 {
     color: #003087;
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 8px;
     border-bottom: 2px solid #6a1b9a;
 }
 
 .field-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+}
+
+.party-row {
+    display: flex;
+    gap: 10px;
+}
+
+.party-name {
+    flex: 1;
+}
+
+.party-name input {
+    width: 100%;
 }
 
 label {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    font-size: 13px;
 }
 
 input, textarea {
-    padding: 8px;
+    padding: 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 13px;
     background-color: #f0f0f0;
 }
 
@@ -127,21 +141,22 @@ textarea {
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
 }
 
 .checkbox-group label {
     font-weight: normal;
+    font-size: 13px;
 }
 
 button {
     background-color: #003087;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 button:hover {
@@ -154,25 +169,31 @@ button:hover {
     }
 
     h1 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .logo {
-        font-size: 20px;
+        width: 80px;
+        height: 32px;
     }
 
     .field-group {
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
     .checkbox-group {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
+    }
+
+    .party-row {
+        flex-direction: column;
+        gap: 8px;
     }
 
     button {
         width: 100%;
-        padding: 12px;
+        padding: 10px;
     }
 
     .lock-container {

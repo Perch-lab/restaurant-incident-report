@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const correctPassword = 'mySecretPassword'; // Set your password here
+    const correctPassword = 'mySecretPassword';
     const lockScreen = document.getElementById('lock-screen');
     const formContainer = document.getElementById('form-container');
     const passwordInput = document.getElementById('password-input');
@@ -11,14 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (enteredPassword === correctPassword) {
             lockScreen.style.display = 'none';
             formContainer.style.display = 'block';
-            attachFormHandler(); // Attach form handler after unlocking
+            attachFormHandler();
         } else {
             errorMessage.style.display = 'block';
             passwordInput.value = '';
         }
     });
 
-    // Allow unlocking with Enter key
     passwordInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             unlockButton.click();
@@ -46,10 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const p = document.createElement('p');
                 p.textContent = input.value || 'N/A';
                 p.style.margin = '0';
-                p.style.padding = '8px';
+                p.style.padding = '6px';
                 p.style.border = '1px solid #ccc';
                 p.style.borderRadius = '4px';
                 p.style.backgroundColor = '#f0f0f0';
+                p.style.fontSize = '13px';
                 input.parentNode.replaceChild(p, input);
             });
 
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const p = document.createElement('p');
             p.textContent = incidentTypes.join(', ') || 'None';
             p.style.margin = '0';
+            p.style.fontSize = '13px';
             checkboxContainer.innerHTML = '';
             checkboxContainer.appendChild(p);
 
@@ -67,25 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const element = document.getElementById('form-container');
 
             try {
-                const canvas = await html2canvas(element, { scale: 1 });
+                const canvas = await html2canvas(element, { scale: 2 });
                 const imgData = canvas.toDataURL('image/png');
                 const imgProps = doc.getImageProperties(imgData);
                 const pdfWidth = doc.internal.pageSize.getWidth();
                 const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-                const pageHeight = doc.internal.pageSize.getHeight();
 
-                let heightLeft = pdfHeight;
-                let position = 0;
-
-                while (heightLeft > 0) {
-                    doc.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-                    heightLeft -= pageHeight;
-                    position -= pageHeight;
-                    if (heightLeft > 0) {
-                        doc.addPage();
-                    }
-                }
-
+                doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 doc.save('incident-report.pdf');
                 alert('PDF downloaded successfully!');
                 form.reset();

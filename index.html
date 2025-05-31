@@ -61,7 +61,7 @@
         <form id="incident-form">
             <div class="header">
                 <h1>RESTAURANT INCIDENT REPORT</h1>
-                <div class="logo">Perch</div>
+                <img src="https://via.placeholder.com/100x40?text=Perch" alt="Perch Logo" class="logo">
             </div>
             <p class="intro">This form is designed to document any incidents that occur within the restaurant. It ensures that all relevant information is captured for review, corrective action, and future prevention.</p>
 
@@ -99,66 +99,56 @@
 
             <div class="section">
                 <h2>Parties Involved</h2>
-                <div class="field-group">
-                    <label for="party1-name">Party 1 Name</label>
-                    <input type="text" id="party1-name" name="party1-name">
-                </div>
-                <div class="field-group">
-                    <label for="party1-contact">Party 1 Contact</label>
-                    <input type="text" id="party1-contact" name="party1-contact">
-                </div>
-                <div class="field-group">
-                    <label for="party2-name">Party 2 Name</label>
-                    <input type="text" id="party2-name" name="party2-name">
-                </div>
-                <div class="field-group">
-                    <label for="party2-contact">Party 2 Contact</label>
-                    <input type="text" id="party2-contact" name="party2-contact">
-                </div>
-                <div class="field-group">
-                    <label for="party3-name">Party 3 Name</label>
-                    <input type="text" id="party3-name" name="party3-name">
-                </div>
-                <div class="field-group">
-                    <label for="party3-contact">Party 3 Contact</label>
-                    <input type="text" id="party3-contact" name="party3-contact">
+                <div class="party-row">
+                    <div class="field-group party-name">
+                        <label for="party1-name">Party 1 Name</label>
+                        <input type="text" id="party1-name" name="party1-name">
+                    </div>
+                    <div class="field-group party-name">
+                        <label for="party2-name">Party 2 Name</label>
+                        <input type="text" id="party2-name" name="party2-name">
+                    </div>
+                    <div class="field-group party-name">
+                        <label for="party3-name">Party 3 Name</label>
+                        <input type="text" id="party3-name" name="party3-name">
+                    </div>
                 </div>
             </div>
 
             <div class="section">
                 <h2>Incident Details</h2>
                 <label for="incident-details">Describe the incident in detail</label>
-                <textarea id="incident-details" name="incident-details" rows="5" required></textarea>
+                <textarea id="incident-details" name="incident-details" rows="4" required></textarea>
             </div>
 
             <div class="section">
                 <h2>Incident Details (continuation)</h2>
                 <label for="immediate-actions">Summarize the immediate actions taken</label>
-                <textarea id="immediate-actions" name="immediate-actions" rows="5" required></textarea>
+                <textarea id="immediate-actions" name="immediate-actions" rows="4" required></textarea>
             </div>
 
             <div class="section">
                 <h2>Investigation and Findings</h2>
                 <label for="conclusions">Discuss any immediate conclusions drawn from the incident</label>
-                <textarea id="conclusions" name="conclusions" rows="5" required></textarea>
+                <textarea id="conclusions" name="conclusions" rows="4" required></textarea>
                 <label for="cause">Identify the cause of the incident</label>
-                <textarea id="cause" name="cause" rows="5" required></textarea>
+                <textarea id="cause" name="cause" rows="4" required></textarea>
             </div>
 
             <div class="section">
                 <h2>Corrective Actions</h2>
                 <label for="corrective-actions">Outline steps for preventing a recurrence of the incident</label>
-                <textarea id="corrective-actions" name="corrective-actions" rows="5" required></textarea>
+                <textarea id="corrective-actions" name="corrective-actions" rows="4" required></textarea>
             </div>
 
             <div class="section">
                 <h2>Conclusion</h2>
                 <label for="follow-up">Indicate whether there will be a follow-up</label>
-                <textarea id="follow-up" name="follow-up" rows="5" required></textarea>
+                <textarea id="follow-up" name="follow-up" rows="4" required></textarea>
             </div>
 
             <div class="section">
-                <h2>Signatures</h2>
+                <h2>Endorsement</h2>
                 <div class="field-group">
                     <label for="reporter-name">Name of Reporter</label>
                     <input type="text" id="reporter-name" name="reporter-name" required>
