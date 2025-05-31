@@ -48,7 +48,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <div class="container" id="form-container">
+    <div id="lock-screen">
+        <div class="lock-container">
+            <h2>Enter Password to Access</h2>
+            <input type="password" id="password-input" placeholder="Password" aria-label="Enter password to unlock">
+            <button id="unlock-button" aria-label="Unlock the form">Unlock</button>
+            <p id="error-message" class="error" style="display: none;">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <div class="container" id="form-container" style="display: none;">
         <form id="incident-form">
             <div class="header">
                 <h1>RESTAURANT INCIDENT REPORT</h1>
@@ -59,7 +68,7 @@
             <div class="section">
                 <div class="field-group">
                     <label for="report-date">Date of Report</label>
-                    <input type="date" id="report-date" name="report-date" max="2025-05-30" required>
+                    <input type="date" id="report-date" name="report-date" max="2025-05-31" required>
                 </div>
                 <div class="field-group">
                     <label for="prepared-by">Prepared By</label>
@@ -70,7 +79,7 @@
             <div class="section">
                 <div class="field-group">
                     <label for="incident-date">Date of Incident</label>
-                    <input type="date" id="incident-date" name="incident-date" max="2025-05-30" required>
+                    <input type="date" id="incident-date" name="incident-date" max="2025-05-31" required>
                 </div>
                 <div class="field-group">
                     <label for="location">Location of Incident</label>
@@ -160,7 +169,7 @@
                 </div>
                 <div class="field-group">
                     <label for="signature-date">Date</label>
-                    <input type="date" id="signature-date" name="signature-date" max="2025-05-30" required>
+                    <input type="date" id="signature-date" name="signature-date" max="2025-05-31" required>
                 </div>
             </div>
 
