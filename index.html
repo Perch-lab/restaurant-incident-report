@@ -1,0 +1,172 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Incident Report</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div id="lock-screen">
+        <div class="lock-container">
+            <h2>Enter Password to Access</h2>
+            <input type="password" id="password-input" placeholder="Password" aria-label="Enter password to unlock">
+            <button id="unlock-button" aria-label="Unlock the form">Unlock</button>
+            <p id="error-message" class="error" style="display: none;">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <div class="container" id="form-container" style="display: none;">
+        <form id="incident-form">
+            <div class="header">
+                <h1>RESTAURANT INCIDENT REPORT</h1>
+                <img src="logo.png" alt="Perch Logo - Should Appear in Top Right" class="logo">
+        
+            </div>
+            <p class="intro">This form is designed to document any incidents that occur within the restaurant. It ensures that all relevant information is captured for review, corrective action, and future prevention.</p>
+
+            <div class="section">
+                <div class="field-group">
+                    <label for="report-date">Date of Report</label>
+                    <input type="date" id="report-date" name="report-date" max="2025-05-31" required>
+                </div>
+                <div class="field-group">
+                    <label for="prepared-by">Prepared By</label>
+                    <input type="text" id="prepared-by" name="prepared-by" required>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="field-group">
+                    <label for="incident-date">Date of Incident</label>
+                    <input type="date" id="incident-date" name="incident-date" max="2025-05-31" required>
+                </div>
+                <div class="field-group">
+                    <label for="location">Location of Incident</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+            </div>
+
+            <div class="section">
+                <label>Type of Incident</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="incident-type" value="Accident"> Accident</label>
+                    <label><input type="checkbox" name="incident-type" value="Injury"> Injury</label>
+                    <label><input type="checkbox" name="incident-type" value="Equipment Failure"> Equipment Failure</label>
+                    <label><input type="checkbox" name="incident-type" value="Customer Complaint"> Customer Complaint</label>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Parties Involved</h2>
+                <div class="party-row">
+                    <div class="field-group party-name">
+                        <label for="party1-name">Party 1 Name</label>
+                        <input type="text" id="party1-name" name="party1-name">
+                    </div>
+                    <div class="field-group party-name">
+                        <label for="party2-name">Party 2 Name</label>
+                        <input type="text" id="party2-name" name="party2-name">
+                    </div>
+                    <div class="field-group party-name">
+                        <label for="party3-name">Party 3 Name</label>
+                        <input type="text" id="party3-name" name="party3-name">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Incident Details</h2>
+                <label for="incident-details">Describe the incident in detail</label>
+                <textarea id="incident-details" name="incident-details" rows="4" required></textarea>
+            </div>
+
+            <div class="section">
+                <h2>Incident Details (continuation)</h2>
+                <label for="immediate-actions">Summarize the immediate actions taken</label>
+                <textarea id="immediate-actions" name="immediate-actions" rows="4" required></textarea>
+            </div>
+
+            <div class="section">
+                <h2>Investigation and Findings</h2>
+                <label for="conclusions">Discuss any immediate conclusions drawn from the incident</label>
+                <textarea id="conclusions" name="conclusions" rows="4" required></textarea>
+                <label for="cause">Identify the cause of the incident</label>
+                <textarea id="cause" name="cause" rows="4" required></textarea>
+            </div>
+
+            <div class="section">
+                <h2>Corrective Actions</h2>
+                <label for="corrective-actions">Outline steps for preventing a recurrence of the incident</label>
+                <textarea id="corrective-actions" name="corrective-actions" rows="4" required></textarea>
+            </div>
+
+            <div class="section">
+                <h2>Conclusion</h2>
+                <label for="follow-up">Indicate whether there will be a follow-up</label>
+                <textarea id="follow-up" name="follow-up" rows="4" required></textarea>
+            </div>
+
+            <div class="section">
+                <h2>Endorsement</h2>
+                <div class="field-group">
+                    <label for="reporter-name">Name of Reporter</label>
+                    <input type="text" id="reporter-name" name="reporter-name" required>
+                </div>
+                <div class="field-group">
+                    <label for="supervisor-name">Name of Supervisor</label>
+                    <input type="text" id="supervisor-name" name="supervisor-name" required>
+                </div>
+                <div class="field-group">
+                    <label for="signature-date">Date</label>
+                    <input type="date" id="signature-date" name="signature-date" max="2025-05-31" required>
+                </div>
+            </div>
+
+            <button type="submit" aria-label="Submit the form and download as PDF">Submit</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
