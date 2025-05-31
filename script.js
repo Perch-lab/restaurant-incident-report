@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const correctPassword = 'mySecretPassword';
+    const correctPassword = '2025';
     const lockScreen = document.getElementById('lock-screen');
     const formContainer = document.getElementById('form-container');
     const passwordInput = document.getElementById('password-input');
